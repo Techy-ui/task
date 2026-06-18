@@ -1,0 +1,90 @@
+:root {
+  --primary-color: #4f46e5;      /* Sleek Indigo */
+  --primary-hover: #4338ca;
+  --success-color: #10b981;      /* Emerald Green */
+  --danger-color: #ef4444;       /* Coral Red */
+  --warning-color: #f59e0b;      /* Amber Yellow */
+  --bg-background: #f8fafc;      /* Crisp Off-White */
+  --card-background: #ffffff;
+  --text-main: #0f172a;          /* Deep Slate */
+  --text-muted: #64748b;         /* Muted Slate */
+  --border-color: #e2e8f0;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-background);
+  color: var(--text-main);
+  -webkit-font-smoothing: antialiased;
+  
+  /* Modern Developer Grid Layout Background */
+  background-image: 
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+  background-size: 24px 24px;
+  position: relative;
+  min-height: 100vh;
+
+  /* FIX: Prevents any sideways scrolling completely */
+  overflow-x: hidden; 
+}
+
+/* Soft glowing design blobs */
+body::before {
+  content: "";
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  top: -100px;
+  left: 0px; /* Adjusted from -100px to prevent viewport spilling */
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+body::after {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  bottom: 0;
+  right: 0px; /* Adjusted from -100px to prevent viewport spilling */
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 70%);
+  z-index: -1;
+  pointer-events: none;
+}
+* {
+  box-sizing: border-box;
+}
+
+/* Custom sleek scrollbar rules */
+
+/* 1. Define the width of the scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+/* 2. Keep the track completely transparent so it's invisible by default */
+::-webkit-scrollbar-track {
+  background: transparent; 
+}
+
+/* 3. Style the moving thumb. We use a subtle color that blends in */
+::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.2); /* Soft indigo tint */
+  border-radius: 9999px;
+  transition: background 0.3s ease;
+}
+
+/* 4. Make it slightly more visible only when hovering over the scroll area */
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.5); 
+}
+
+/* For Firefox compatibility */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(99, 102, 241, 0.2) transparent;
+}
