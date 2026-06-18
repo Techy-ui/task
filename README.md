@@ -6,6 +6,16 @@ A production-grade, multi-user real-time task management platform engineered for
 
 ## Live Demo:- https://techy-ui.github.io/task/
 
+## 🎯 Project Core Objectives & Scope Deliverables
+
+This system was designed and delivered to meet rigorous full-stack development specifications, resolving modern coordination bottlenecks through a predefined engineering scope:
+
+1. Full-Stack Systems Engineering: Implemented a decoupled architecture using React 18+ for front-end interface mechanics and Node.js/Express for backend transaction processing.
+2. Cryptographic Security Framework: Engineered an explicit User Authentication and Authorization layer utilizing JSON Web Tokens (JWT) to secure user spaces and state routes.
+3. Advanced Document Orchestration: Developed robust backend CRUD APIs to seamlessly handle user accounts, project instantiation, multi-user assignment handling, and lane-based phase tracking.
+4. Low-Latency Collaborative Architecture: Integrated bidirectional WebSocket channels providing zero-latency notifications and instant viewport updates to active teammates whenever boards mutate.
+
+---
 ## 🏛️ System Architecture Overview
 
 The application is deployed as a decoupled monorepo architecture that isolates layout-rendering from transactional data layers:
@@ -47,103 +57,5 @@ The application is deployed as a decoupled monorepo architecture that isolates l
 
 ---
 
-## 📁 Monorepo Directory Architecture
 
-task-manager-workspace/
-├── backend/                        # API & WebSocket Event Kernel
-│   ├── models/                     # Data Object Mapping Schemas
-│   │   ├── User.js                 # Authentication Schema (Username, Hash)
-│   │   └── Task.js                 # Task Schema (Title, Descr, Status, Assignees)
-│   ├── routes/                     # Operational Routing Endpoints
-│   │   ├── authRoutes.js           # Auth Processing Gateway (/api/auth)
-│   │   └── taskRoutes.js           # Document CRUD Pipelines (/api/tasks)
-│   ├── server.js                   # Master Initialization Engine & WS Handshake
-│   └── package.json
-└── frontend/                       # Client Single-Page Application (SPA)
-    ├── src/
-    │   ├── App.jsx                 # Central Application Kernel, State & Sockets
-    │   ├── App.css                 # Custom Component UI Layout Engine
-    │   └── main.jsx                # DOM Entrypoint Anchor
-    ├── vite.config.js              # Build configurations & Base Asset paths
-    └── package.json
 
----
-
-## 📡 API Specification & System Communication Protocols
-
-### 🔒 1. Authentication Endpoints (/api/auth)
-
-* POST /register
-  - Description: Provisions a new user account.
-  - Payload Requirements: { "username": "...", "password": "..." }
-  - Server Response: 201 Created + JWT Token
-
-* POST /login
-  - Description: Validates credentials and yields authorization.
-  - Payload Requirements: { "username": "...", "password": "..." }
-  - Server Response: 200 OK + JWT Token
-
-### 📋 2. Task Management Endpoints (/api/tasks)
-Note: All endpoints below expect a "Bearer <token>" string included inside the HTTP Authorization request header.
-
-* GET /
-  - Description: Retrieves all context-valid tasks for the user.
-  - Payload Requirements: None
-  - WS Broadcast Event Triggered: None
-
-* POST /
-  - Description: Creates a new task object in the cluster.
-  - Payload Requirements: { "title": "...", "description": "...", "assignees": "..." }
-  - WS Broadcast Event Triggered: task_changed
-
-* PUT /:id
-  - Description: Cycles task status lane value.
-  - Payload Requirements: { "status": "In Progress" } (or Pending/Completed)
-  - WS Broadcast Event Triggered: task_changed
-
-* DELETE /:id
-  - Description: Removes the object permanently from database.
-  - Payload Requirements: None
-  - WS Broadcast Event Triggered: task_changed
-
-### 🔌 3. WebSocket Real-Time Event Mappings
-The application connects via an upgraded TCP handshake directly to the Node server.
-
-* Inbound Listeners (client.on):
-  - task_changed: Emitted by the backend instantly when any database mutation occurs. Upon reception, all active clients seamlessly fire an asynchronous background fetchTasks() request to refresh their viewport without blocking the interface.
-
----
-
-## 🏁 Installation, Configuration & Local Development
-
-To run this system locally on an engineering workstation, follow these steps:
-
-### Phase A: Database & Backend Server Setup
-1. From the monorepo root folder, shift down into the server environment:
-   cd backend
-2. Install standard node modules:
-   npm install
-3. Generate a local configuration file named .env right inside the /backend directory:
-   PORT=5000
-   MONGO_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/taskDB
-   JWT_SECRET=X7f9K2s_EnterpriseSecretKey_pP9q2W
-4. Run the development initialization command:
-   node server.js
-
-### Phase B: UI Client Environment Setup
-1. Launch a separate terminal interface from the project root and jump into the frontend:
-   cd frontend
-2. Install client dependencies:
-   npm install
-3. Boot up the Vite rendering instance:
-   npm run dev
-4. Point your browser engine to: http://localhost:5173
-
----
-
-## 🌐 Production Cloud Deployment Summary
-
-The operational stack has been successfully configured and compiled for automated cloud operations:
-
-* Backend Network Architecture: Hosted via an automated continuous deployment pipeline on Render. Node runtime handles multi-tenant connections and dynamic CORS origin authorization checks.
-* Frontend Web Distribution: Static compilation directories (dist/) are delivered serverlessly globally via GitHub Pages tracking isolated gh-pages branch subtrees.
