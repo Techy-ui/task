@@ -13,7 +13,7 @@ const server = http.createServer(app);
 // Initialize Socket.io with CORS settings
 const io = new Server(server, {
     cors: {
-        origin: "http://localhost:5173", // Allow connections from your React app
+        origin: "https://techy_ui.github.io", // Allow connections from your React app
         methods: ["GET", "POST", "PUT", "DELETE"]
     }
 });
