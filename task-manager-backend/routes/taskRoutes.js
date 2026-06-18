@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Task = require('../models/Task');
-const User = require('../models/User');
+const User = require('../models/user');
 const auth = require('../middleware/auth');
 
 // 1. CREATE a task (Safely captures body parameters)
