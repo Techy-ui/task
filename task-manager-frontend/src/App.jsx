@@ -18,8 +18,8 @@ function App() {
   const [description, setDescription] = useState('');
   const [assignedTo, setAssignedTo] = useState(''); 
 
-  const API_TASKS_URL = 'http://localhost:5000/api/tasks';
-  const API_AUTH_URL = 'http://localhost:5000/api/auth';
+  const API_TASKS_URL = 'https://task-42nt.onrender.com/api/tasks';
+  const API_AUTH_URL = 'https://task-42nt.onrender.com/api/auth';
 
   useEffect(() => {
     if (token) {
@@ -30,7 +30,7 @@ function App() {
   }, [token]);
 
   useEffect(() => {
-    const socket = io('http://localhost:5000');
+    const socket = io('https://task-42nt.onrender.com');
     
     socket.on('task_changed', () => {
       if (token) fetchTasks();
